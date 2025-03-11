@@ -30,7 +30,9 @@ public class Main {
                         System.out.println("Produto adicionado com sucesso!");
                     }
                     break;
-
+                case 2:
+                    alterarProduto(sc, produtoList);
+                    break;
                 case 3:
                     if (produtoList.isEmpty()) {
                         System.out.println("Nenhum produto cadastrado.");
@@ -41,59 +43,93 @@ public class Main {
                         }
                     }
                     break;
-
+                case 4:
+                    // Implementação da exclusão
+                    break;
                 case 5:
                     System.out.println("Saindo do sistema...");
                     sc.close();
                     return;
-
                 default:
                     System.out.println("Opção inválida!");
             }
         }
     }
 
-    public static Produto incluirProduto(Scanner sc) { // Passando Scanner como parâmetro para evitar múltiplas instâncias
+    public static Produto incluirProduto(Scanner sc) {
         System.out.println("Inclusão de Produto");
         System.out.println("Digite o código do produto: ");
         int codigo = sc.nextInt();
 
         System.out.println("Digite o nome do produto: ");
-        String nome = sc.next();
+        sc.nextLine(); // Consumir quebra de linha
+        String nome = sc.nextLine();
 
         System.out.println("Digite o preço do produto: ");
         double preco = sc.nextDouble();
 
         System.out.println("Digite o tipo do produto: ");
-        System.out.println("1. Alimento\n2. Eletrônico\n3. Produto");
+        System.out.println("1. Alimento\n2. Eletrônico\n3. Roupa");
 
         int tipoProduto = sc.nextInt();
 
         switch (tipoProduto) {
             case 1:
                 System.out.println("Digite a data de validade do alimento: ");
-                String data_validade = sc.next();
+                sc.nextLine();
+                String data_validade = sc.nextLine();
                 System.out.println("Digite a categoria do alimento: ");
-                String categoria = sc.next();
+                String categoria = sc.nextLine();
                 return new Alimento(codigo, nome, preco, data_validade, categoria);
 
             case 2:
                 System.out.println("Digite a marca do eletrônico: ");
-                String marca = sc.next();
+                sc.nextLine();
+                String marca = sc.nextLine();
                 System.out.println("Digite a garantia em meses do eletrônico: ");
                 int garantia = sc.nextInt();
-                return new Eletronico(codigo,nome,preco,marca,garantia);
+                return new Eletronico(codigo, nome, preco, marca, garantia);
 
             case 3:
                 System.out.println("Digite o tamanho da roupa:");
-                String tamanho = sc.next();
+                sc.nextLine();
+                String tamanho = sc.nextLine();
                 System.out.println("Digite o material da roupa:");
-                String material = sc.next();
-                return new Roupa(codigo,nome,preco,tamanho,material);
+                String material = sc.nextLine();
+                return new Roupa(codigo, nome, preco, tamanho, material);
 
             default:
                 System.out.println("Tipo de produto inválido.");
                 return null;
         }
+    }
+
+    public static void alterarProduto(Scanner sc, ArrayList<Produto> produtoList) {
+        System.out.println("Alteração de Produto");
+        System.out.println("Digite o código do produto que deseja alterar: ");
+        int codigo = sc.nextInt();
+
+        Produto produtoEncontrado = null;
+        for (Produto p : produtoList) {
+            if (p.getId() == codigo) {
+                produtoEncontrado = p;
+                break;
+            }
+        }
+
+        if (produtoEncontrado != null) {
+            System.out.println("Produto encontrado: " + produtoEncontrado.getNome());
+
+            sc.nextLine(); // Consumir a quebra de linha pendente do nextInt()
+
+            System.out.println("Digite o novo nome: ");
+            String novoNome = sc.nextLine(); // Capturar o nome corretamente
+
+            produtoEncontrado.setNome(novoNome);
+            System.out.println("Nome atualizado com sucesso!");
+        } else {
+            System.out.println("Produto com código " + codigo + " não encontrado.");
+        }
+
     }
 }
