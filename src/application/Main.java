@@ -44,7 +44,7 @@ public class Main {
                     }
                     break;
                 case 4:
-                    // Implementação da exclusão
+                    excluirProduto(sc, produtoList);
                     break;
                 case 5:
                     System.out.println("Saindo do sistema...");
@@ -132,4 +132,26 @@ public class Main {
         }
 
     }
+
+    public static void excluirProduto(Scanner sc, ArrayList<Produto> produtoList) {
+        System.out.println("Exclusão de Produto");
+        System.out.println("Digite o código do produto que deseja excluir: ");
+        int codigo = sc.nextInt();
+
+        boolean removido = false;
+
+        for (int i = 0; i < produtoList.size(); i++) {
+            if (produtoList.get(i).getId() == codigo) {
+                produtoList.remove(i);
+                removido = true;
+                System.out.println("Produto removido com sucesso!");
+                break;
+            }
+        }
+
+        if (!removido) {
+            System.out.println("Produto com código " + codigo + " não encontrado.");
+        }
+    }
+
 }
