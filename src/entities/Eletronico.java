@@ -33,6 +33,7 @@ public class Eletronico extends Produto {
 
     @Override
     public void exibir_informacoes() {
+        System.out.println("Eletrônico");
         super.exibir_informacoes();
         System.out.println("Marca: " + getMarca());
         System.out.println("Garantia meses: " + getGarantia_meses());

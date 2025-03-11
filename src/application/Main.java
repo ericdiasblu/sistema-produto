@@ -1,7 +1,9 @@
 package application;
 
 import entities.Alimento;
+import entities.Eletronico;
 import entities.Produto;
+import entities.Roupa;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -35,7 +37,7 @@ public class Main {
                     } else {
                         System.out.println("Lista de Produtos:");
                         for (Produto p : produtoList) {
-                            System.out.println(p);
+                            p.exibir_informacoes();
                         }
                     }
                     break;
@@ -74,6 +76,20 @@ public class Main {
                 System.out.println("Digite a categoria do alimento: ");
                 String categoria = sc.next();
                 return new Alimento(codigo, nome, preco, data_validade, categoria);
+
+            case 2:
+                System.out.println("Digite a marca do eletrônico: ");
+                String marca = sc.next();
+                System.out.println("Digite a garantia em meses do eletrônico: ");
+                int garantia = sc.nextInt();
+                return new Eletronico(codigo,nome,preco,marca,garantia);
+
+            case 3:
+                System.out.println("Digite o tamanho da roupa:");
+                String tamanho = sc.next();
+                System.out.println("Digite o material da roupa:");
+                String material = sc.next();
+                return new Roupa(codigo,nome,preco,tamanho,material);
 
             default:
                 System.out.println("Tipo de produto inválido.");

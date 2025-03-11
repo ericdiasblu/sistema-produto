@@ -34,6 +34,8 @@ public class Alimento extends Produto {
 
     @Override
     public void exibir_informacoes() {
+        System.out.println("――――――――――――");
+        System.out.println("Alimentos");
         super.exibir_informacoes();
         System.out.println("Data de validade: " + getData_validade());
         System.out.println("Categoria: " + getCategoria());
