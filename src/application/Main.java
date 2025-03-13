@@ -106,6 +106,7 @@ public class Main {
 
     public static void alterarProduto(Scanner sc, ArrayList<Produto> produtoList) {
         System.out.println("Alteração de Produto");
+
         System.out.println("Digite o código do produto que deseja alterar: ");
         int codigo = sc.nextInt();
 
@@ -119,19 +120,71 @@ public class Main {
 
         if (produtoEncontrado != null) {
             System.out.println("Produto encontrado: " + produtoEncontrado.getNome());
+            sc.nextLine(); // Consumir quebra de linha pendente
 
-            sc.nextLine(); // Consumir a quebra de linha pendente do nextInt()
-
+            // Atualiza atributos comuns a todos os produtos
             System.out.println("Digite o novo nome: ");
-            String novoNome = sc.nextLine(); // Capturar o nome corretamente
+            String novoNome = sc.nextLine();
+
+            System.out.println("Digite o novo preço: ");
+            double novoPreco = sc.nextDouble();
 
             produtoEncontrado.setNome(novoNome);
-            System.out.println("Nome atualizado com sucesso!");
+            produtoEncontrado.setPreco(novoPreco);
+
+            // Escolha do tipo para atualização dos atributos específicos
+            System.out.println("Digite o tipo do produto para alterar os atributos específicos: ");
+            System.out.println("1. Alimento\n2. Eletrônico\n3. Roupa");
+            int tipoProduto = sc.nextInt();
+            sc.nextLine(); // Consumir nova linha
+
+            switch (tipoProduto) {
+                case 1:
+                    if (produtoEncontrado instanceof Alimento) {
+                        System.out.println("Digite a nova data de validade do alimento: ");
+                        String novaDataValidade = sc.nextLine();
+                        System.out.println("Digite a nova categoria do alimento: ");
+                        String novaCategoria = sc.nextLine();
+                        ((Alimento) produtoEncontrado).setDataValidade(novaDataValidade);
+                        ((Alimento) produtoEncontrado).setCategoria(novaCategoria);
+                    } else {
+                        System.out.println("O produto selecionado não é do tipo Alimento.");
+                    }
+                    break;
+                case 2:
+                    if (produtoEncontrado instanceof Eletronico) {
+                        System.out.println("Digite a nova marca do eletrônico: ");
+                        String novaMarca = sc.nextLine();
+                        System.out.println("Digite a nova garantia em meses do eletrônico: ");
+                        int novaGarantia = sc.nextInt();
+                        ((Eletronico) produtoEncontrado).setMarca(novaMarca);
+                        ((Eletronico) produtoEncontrado).setGarantiaMeses(novaGarantia);
+                    } else {
+                        System.out.println("O produto selecionado não é do tipo Eletrônico.");
+                    }
+                    break;
+                case 3:
+                    if (produtoEncontrado instanceof Roupa) {
+                        System.out.println("Digite o novo tamanho da roupa: ");
+                        String novoTamanho = sc.nextLine();
+                        System.out.println("Digite o novo material da roupa: ");
+                        String novoMaterial = sc.nextLine();
+                        ((Roupa) produtoEncontrado).setTamanho(novoTamanho);
+                        ((Roupa) produtoEncontrado).setMaterial(novoMaterial);
+                    } else {
+                        System.out.println("O produto selecionado não é do tipo Roupa.");
+                    }
+                    break;
+                default:
+                    System.out.println("Tipo de produto inválido.");
+                    break;
+            }
+            System.out.println("Produto alterado com sucesso!");
         } else {
             System.out.println("Produto com código " + codigo + " não encontrado.");
         }
-
     }
+
 
     public static void excluirProduto(Scanner sc, ArrayList<Produto> produtoList) {
         System.out.println("Exclusão de Produto");

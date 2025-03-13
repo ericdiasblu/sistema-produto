@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Alimento extends Produto {
 
-    private String data_validade;
+    private String dataValidade;
     private String categoria;
 
     public Alimento() {
@@ -12,16 +12,16 @@ public class Alimento extends Produto {
 
     public Alimento(Integer id, String nome, Double preco, String data_validade, String categoria) {
         super(id, nome, preco);
-        this.data_validade = data_validade;
+        this.dataValidade = data_validade;
         this.categoria = categoria;
     }
 
     public String getData_validade() {
-        return data_validade;
+        return dataValidade;
     }
 
-    public void setData_validade(String data_validade) {
-        this.data_validade = data_validade;
+    public void setDataValidade(String data_validade) {
+        this.dataValidade = data_validade;
     }
 
     public String getCategoria() {
