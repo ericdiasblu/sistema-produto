@@ -12,10 +12,14 @@ public class Main {
 
     public static void main(String[] args) {
 
+        // Biblioteca do Scanner
         Scanner sc = new Scanner(System.in);
+        // Lista de produtos
         ArrayList<Produto> produtoList = new ArrayList<>();
 
+        // Loop do funcionamento do programa
         while (true) {
+            // Tela de escolha de opção
             System.out.println("┌————————————————————————————————————————————————————————————┐");
             System.out.println("│           Sistema de Banco de Dados de Produtos            │");
             System.out.println("└————————————————————————————————————————————————————————————┘");
@@ -29,18 +33,21 @@ public class Main {
             System.out.println("└————————————————————————————————————————————————————————————┘");
 
             int opcao = sc.nextInt();
-
+            // Switch para escolher opção
             switch (opcao) {
                 case 1:
+                    // Incluir produto
                     Produto produto = incluirProduto(sc);
                     if (produto != null) {
                         produtoList.add(produto); // Adiciona à lista
                         System.out.println("Produto adicionado com sucesso!");
                     }
                     break;
+                    // Alterar informações do Produto
                 case 2:
                     alterarProduto(sc, produtoList);
                     break;
+                    // Listar produtos
                 case 3:
                     if (produtoList.isEmpty()) {
                         System.out.println("Nenhum produto cadastrado.");
@@ -50,20 +57,24 @@ public class Main {
                             p.exibir_informacoes();
                         }
                     }
+                    // Excluir produto específico
                     break;
                 case 4:
                     excluirProduto(sc, produtoList);
                     break;
+                    // Sair do sistema
                 case 5:
                     System.out.println("Saindo do sistema...");
                     sc.close();
                     return;
+                    // Caso a opcao não seja de 1-5 é inválida
                 default:
                     System.out.println("Opção inválida!");
             }
         }
     }
 
+    // Metodo de inclusão de produto
     public static Produto incluirProduto(Scanner sc) {
         System.out.println("┌————————————————————————————————————————————————————————————┐");
         System.out.println("│                    Inclusão de Produto                     │ ");
@@ -88,7 +99,9 @@ public class Main {
 
         int tipoProduto = sc.nextInt();
 
+        // Switch para escolher o tipo do produto
         switch (tipoProduto) {
+            // Alimento
             case 1:
                 System.out.println(" ⭢ Digite a data de validade do alimento: ");
                 sc.nextLine();
@@ -97,6 +110,7 @@ public class Main {
                 String categoria = sc.nextLine();
                 return new Alimento(codigo, nome, preco, data_validade, categoria);
 
+            // Eletrônio
             case 2:
                 System.out.println(" ⭢ Digite a marca do eletrônico: ");
                 sc.nextLine();
@@ -105,6 +119,7 @@ public class Main {
                 int garantia = sc.nextInt();
                 return new Eletronico(codigo, nome, preco, marca, garantia);
 
+            // Roupa
             case 3:
                 System.out.println(" ⭢ Digite o tamanho da roupa:");
                 sc.nextLine();
@@ -113,12 +128,14 @@ public class Main {
                 String material = sc.nextLine();
                 return new Roupa(codigo, nome, preco, tamanho, material);
 
+                // Caso o usuario digite algo diferente de 1,2,3
             default:
                 System.out.println(" ⚠ Tipo de produto inválido.");
                 return null;
         }
     }
 
+    // Metodo de alteração de produto
     public static void alterarProduto(Scanner sc, ArrayList<Produto> produtoList) {
         System.out.println("┌————————————————————————————————————————————————————————————┐");
         System.out.println("│                    Alteração de Produto                    │");
@@ -128,6 +145,7 @@ public class Main {
         System.out.println(" ⭢ Digite o código do produto que deseja alterar: ");
         int codigo = sc.nextInt();
 
+        // Buscar produto pelo ID
         Produto produtoEncontrado = null;
         for (Produto p : produtoList) {
             if (p.getId() == codigo) {
@@ -160,8 +178,10 @@ public class Main {
             int tipoProduto = sc.nextInt();
             sc.nextLine(); // Consumir nova linha
 
+            // Escolher o tipo do produto a ser alterado
             switch (tipoProduto) {
                 case 1:
+                    // Alimento
                     if (produtoEncontrado instanceof Alimento) {
                         System.out.println(" ⭢ Digite a nova data de validade do alimento: ");
                         String novaDataValidade = sc.nextLine();
@@ -174,6 +194,7 @@ public class Main {
                     }
                     break;
                 case 2:
+                    // Eletrônico
                     if (produtoEncontrado instanceof Eletronico) {
                         System.out.println(" ⭢ Digite a nova marca do eletrônico: ");
                         String novaMarca = sc.nextLine();
@@ -186,6 +207,7 @@ public class Main {
                     }
                     break;
                 case 3:
+                    // Roupa
                     if (produtoEncontrado instanceof Roupa) {
                         System.out.println(" ⭢ Digite o novo tamanho da roupa: ");
                         String novoTamanho = sc.nextLine();
@@ -207,7 +229,7 @@ public class Main {
         }
     }
 
-
+    // Metodo de exclusão de produto
     public static void excluirProduto(Scanner sc, ArrayList<Produto> produtoList) {
         System.out.println("┌————————————————————————————————————————————————————————————┐");
         System.out.println("│                    Exclusão de Produto                     │");
@@ -218,15 +240,17 @@ public class Main {
 
         boolean removido = false;
 
+        // Busca na lista o Id escrito
         for (int i = 0; i < produtoList.size(); i++) {
             if (produtoList.get(i).getId() == codigo) {
                 produtoList.remove(i);
+                // Atualiza o estado da variavel
                 removido = true;
                 System.out.println(" ⭢ Produto removido com sucesso!");
                 break;
             }
         }
-
+        // Caso o usuario digite um codigo que não existe
         if (!removido) {
             System.out.println(" ⚠ Produto com código " + codigo + " não encontrado.");
         }
