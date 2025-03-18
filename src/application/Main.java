@@ -267,7 +267,7 @@ public class Main {
 
         // Busca o produto pelo código para exclusão
         System.out.println(" ⭢ Digite o código do produto que deseja excluir: ");
-        int codigo = sc.nextInt();
+        String codigo = sc.next();
 
         boolean removido = false;
 
