@@ -1,26 +1,31 @@
 package entities;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Alimento extends Produto {
 
-    private String dataValidade;
+    // Variaveis do Alimento
+    private LocalDate dataValidade;
     private String categoria;
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
 
     public Alimento() {
     }
 
-    public Alimento(Integer id, String nome, Double preco, String data_validade, String categoria) {
+    // Construtor
+    public Alimento(String id, String nome, Double preco, LocalDate data_validade, String categoria) {
         super(id, nome, preco);
         this.dataValidade = data_validade;
         this.categoria = categoria;
     }
-
-    public String getData_validade() {
+    // Getters and Setters
+    public LocalDate getData_validade() {
         return dataValidade;
     }
 
-    public void setDataValidade(String data_validade) {
+    public void setDataValidade(LocalDate data_validade) {
         this.dataValidade = data_validade;
     }
 
@@ -32,12 +37,11 @@ public class Alimento extends Produto {
         this.categoria = categoria;
     }
 
+    // Metodo exibirInformacoes com variaveis alimento
     @Override
     public void exibir_informacoes() {
-        System.out.println("――――――――――――");
-        System.out.println("Alimentos");
         super.exibir_informacoes();
-        System.out.println("Data de validade: " + getData_validade());
+        System.out.println("Data de validade: " + getData_validade().format(dtf));
         System.out.println("Categoria: " + getCategoria());
     }
 }
