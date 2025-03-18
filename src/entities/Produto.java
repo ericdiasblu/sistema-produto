@@ -1,24 +1,26 @@
 package entities;
 
 public class Produto {
-
-    private Integer id;
+    // Variaveis do Produto
+    private String id;
     private String nome;
     private Double preco;
 
     public Produto() {}
 
-    public Produto(Integer id, String nome, Double preco) {
+    // Construtor
+    public Produto(String id, String nome, Double preco) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
     }
 
-    public Integer getId() {
+    // Getters and Setters
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -38,6 +40,7 @@ public class Produto {
         this.preco = preco;
     }
 
+    // Metodo exibirInformacoes geral
     public void exibir_informacoes() {
         System.out.println("Código: " + getId());
         System.out.println("Nome: " + getNome());
